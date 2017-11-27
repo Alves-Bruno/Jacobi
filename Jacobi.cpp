@@ -12,17 +12,17 @@
 #include <limits>
 
 
-float calcula_dk (std::vector<float> Xk, std::vector<float> Xk_1){
+double calcula_dk (std::vector<double> Xk, std::vector<double> Xk_1){
 
 	// Xk -->> vetor de dos x^(k)
 	// xk_1 -->> vetor de dos x^(k - 1)
 
-	std::vector<float> vector_result_sub; //vetor com os resultados das subtrações
-		float dk; //distancia d^(k)
+	std::vector<double> vector_result_sub; //vetor com os resultados das subtrações
+		double dk; //distancia d^(k)
 
 		for (int i = 0; i < Xk.size() - 1; i++) {
 
-			float result_i = Xk[i] - Xk_1[i]; // calcula xi^(k) - xi^(k - 1)
+			double result_i = Xk[i] - Xk_1[i]; // calcula xi^(k) - xi^(k - 1)
 			vector_result_sub.push_back(result_i); // armazena resultado no vetor
 
 		}
@@ -34,19 +34,19 @@ float calcula_dk (std::vector<float> Xk, std::vector<float> Xk_1){
 
 }
 
-std::vector<float> Met_Jacobi(std::vector<float> X0, std::vector<std::vector<float>> Matriz, double Erro, int num_max_iteracoes){
+std::vector<double> Met_Jacobi(std::vector<double> X0, std::vector<std::vector<double>> Matriz, double Erro, int num_max_iteracoes){
 
 	double dk = std::numeric_limits<double>::max(); // dk recebe mais infinito
 
-	std::vector<float> Xk = {0, 0, 0};
-	std::vector<float> Xk_1 = X0;
+	std::vector<double> Xk = {0, 0, 0};
+	std::vector<double> Xk_1 = X0;
 
 	int iteracao = 0;
 	while(dk > Erro || num_max_iteracoes == iteracao){
 
 		for(int i = 0; i < Matriz.size(); i++){
 
-			float soma_linha = 0;
+			double soma_linha = 0;
 			for(int j = 0; j < Matriz[i].size(); j++){
 
 				if(j == i){
@@ -77,12 +77,12 @@ std::vector<float> Met_Jacobi(std::vector<float> X0, std::vector<std::vector<flo
 
 int main(){
 
-	std::vector<float> X0; // Vetor que contem X^(0)
-	std::vector<std::vector<float>> Matriz; // Matriz com os X1, X2, X3, ..., Xn isolados
+	std::vector<double> X0; // Vetor que contem X^(0)
+	std::vector<std::vector<double>> Matriz; // Matriz com os X1, X2, X3, ..., Xn isolados
 	double Erro;
 
-	std::vector<float> Xk = {0, 0, 0};
-	std::vector<float> Xk_1;
+	std::vector<double> Xk = {0, 0, 0};
+	std::vector<double> Xk_1;
 
 	Erro = 0.001;
 
